@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasks
+  template:
+    metadata:
+      labels:
+        app: tasks
+    spec:
+      containers:
+        - name: tasks
+          image: sujaygowdag333/kube-demo-tasks:latest
+          env:
+            - name: AUTH_ADDRESS
+              # value: "10.99.1.1"
+              # OR USE BELOW as Domain Names (core dns)
+              value: "auth-service.default"
+            - name: TASK_FOLDER
+              # value: "10.99.1.1"
+              # OR USE BELOW as Domain Names (core dns)
+              value: tasks
